@@ -1,6 +1,6 @@
 import React, { useRef } from "react";
 import { Input } from "@nextui-org/input";
-import { Button, Select, SelectItem } from "@nextui-org/react";
+import { Button} from "@nextui-org/react";
 import "./App.css";
 
 const App = () => {
@@ -9,37 +9,33 @@ const App = () => {
   const wishRef = useRef();
   const optionRef = useRef();
 
-  const options = [
-    { key: "1", label: "₹1" },
-    { key: "2", label: "₹2" },
-    { key: "3", label: "₹3" },
-  ];
-
   const handlePayment = async (price) => {
     const name = nameRef.current.value;
     const phone = phoneRef.current.value;
     const wish = wishRef.current.value;
 
     const options = {
-      key: "rzp_test_ju5jEL5tkrSPGE", // Your API Key ID
-      amount: price * 100, // Amount in paise (₹1 = 100 paise)
+      key: "rzp_test_ju5jEL5tkrSPGE",
+      amount: price * 100,
       currency: "INR",
       name: name,
       description: wish,
-      image: "https://your-logo-url.com", // Your logo URL (optional)
+      image: "https://your-logo-url.com",
       handler: function (response) {
         alert(
           `Payment successful! Payment ID: ${response.razorpay_payment_id}`
         );
-        
       },
       prefill: {
         name: name,
         contact: phone,
-        email: "example@example.com", 
+      },
+      notify: {
+        sms: true,
+        email: true,
       },
       theme: {
-        color: "#3399cc", // Customize payment UI color
+        color: "#3399cc",
       },
     };
 
@@ -98,22 +94,19 @@ const App = () => {
         </div>
 
         <div className="form-group">
-          <div className="flex w-full flex-wrap md:flex-nowrap mb-6 md:mb-0 gap-4">
-            <Select
+          <div className="flex w-full flex-wrap md:flex-nowrap gap-4">
+            <Input
+              type="text"
               variant="underlined"
               label="How Much You Want To Pay ₹"
               required
               id="option"
               ref={optionRef}
-            >
-              {options.map((option) => (
-                <SelectItem key={option.key} value={option.label}>
-                  {option.label}
-                </SelectItem>
-              ))}
-            </Select>
+            />
           </div>
         </div>
+
+       
 
         <Button type="submit" className="submit-button">
           Pay
