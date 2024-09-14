@@ -31,12 +31,12 @@ const App = () => {
         alert(
           `Payment successful! Payment ID: ${response.razorpay_payment_id}`
         );
-        // Payment verification code should go here
+        
       },
       prefill: {
         name: name,
         contact: phone,
-        email: "example@example.com", // You can use dynamic email input too
+        email: "example@example.com", 
       },
       theme: {
         color: "#3399cc", // Customize payment UI color
